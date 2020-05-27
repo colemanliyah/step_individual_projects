@@ -4,6 +4,10 @@
   width: 650px;
 }
 
+.name {
+    margin-left: 150px;
+}
+
 #greeting-container {
   margin-top: 20px;
 }
