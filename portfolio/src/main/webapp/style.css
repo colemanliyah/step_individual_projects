@@ -1,11 +1,22 @@
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 800px;
+  box-shadow: 0 0 40px #9A9A9A; 
+  padding: 20px 20px 40px 20px;
+}
+
+.slideimage {
+    height: 50px;s
+}
+
+.blog {
+    box-shadow: 0 0 10px #9A9A9A; 
+    padding: 10px 10px 30px 10px
 }
 
 .name {
-    margin-left: 150px;
+    margin-left: 250px;
 }
 
 #greeting-container {

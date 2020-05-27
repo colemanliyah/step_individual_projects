@@ -13,25 +13,70 @@
 
   <body>
     <div id="content">
+        </br>
         <h1 class="name">Liyah Coleman</h1>
         </br>
-        <p>This is my portfolio I  am a S.T.E.P. intern at Google and this fall I will be a sophmore at Barrett, the Honors College at A.S.U. .</p>
-        <p> Insert insignificant change here! </p>
-        </br>
 
-        <button class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Projects</button>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body"> 
-                <h1> Olfaction Research Project </h1>
-                </p> Insert Description Here </p>
-                </p> Add picture and/or link here </p>
-            </div>
-            <div class="card card-body"> 
-                <h1> What's the Dish? </h1>
-                </p> Insert Description Here </p>
-                </p> Add picture and/or link here </p>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner" >
+                <div class="carousel-item active">
+                <img src="/images/one.jpg" class="d-block w-100" style="height:800px" style="width:800px">
+                </div>
+                <div class="carousel-item">
+                <img src="/images/two.jpg" class="d-block w-100" style="height:800px" style="width:800px">
+                </div>
             </div>
         </div>
+        </br>
+
+        <nav id="navbar-example2" class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#"></a>
+            <ul class="nav nav-pills">
+                <li class="nav-item"> 
+                    <a class="nav-link" href="#one">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#two"> Updates </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+            <h1> About Me </h1>
+            <p>Hello, my name is Liyah and this is my portfolio! I am currently a S.T.E.P. intern at Google but my first experience at Google was through the CSSI program last summer! I am really glad to be back here </p>
+            </br>
+
+            <h1 id="one"> Projects </h1>
+            <button class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Projects</button>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body"> 
+                    <h1> Olfaction Research Project </h1>
+                    </p> I currently work in a research lab where I build compuational models to answer questions about olfaction perception. The current topic I am reasering is "using the structural features of enantiomers to predict if the pair of enantiomer molecules will be similar to divergent in odor perception." </p>
+                    <img src="images/img.png">
+                </div>
+                <div class="card card-body"> 
+                    <h1> What's the Dish? </h1>
+                    </p> Two other CSSI students and I worked to build this web application with a Javascript frontend and Python server. The web application simplifies the problem of deciding what ot cook based on what's left in your kitchen </p>
+                    </p> Project link: whatsthedish.appspot.com </p>
+                    <img src="/images/three.png">
+                </div>
+            </div>
+
+            </br>
+            <h1 id="two"> Updates </h1>
+            </br>
+            <div class="blog"> 
+                <h1> Week One of S.T.E.P. </h1>
+                <p> 27 May 2020 </p>
+                <p> Working on the individual projects </p>
+            </div>
+        </div>
+        </br> 
+        <!-- <button onclick="addRandomGreeting()"> Random Notes </button> -->
 
     </div>
   </body>
