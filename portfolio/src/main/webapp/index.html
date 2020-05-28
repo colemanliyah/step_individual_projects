@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -33,21 +34,44 @@
 
             <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About Me</a>
+                    <a class="nav-link active" 
+                    id="pills-home-tab" 
+                    data-toggle="pill" 
+                    href="#pills-home" 
+                    role="tab" 
+                    aria-controls="pills-home" 
+                    aria-selected="true">
+                    About Me</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Projects</a>
+                    <a class="nav-link" 
+                    id="pills-profile-tab" 
+                    data-toggle="pill" 
+                    href="#pills-profile" 
+                    role="tab" 
+                    aria-controls="pills-profile" 
+                    aria-selected="false">
+                    Projects</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Updates</a>
+                    <a class="nav-link" 
+                    id="pills-contact-tab" 
+                    data-toggle="pill" 
+                    href="#pills-contact" 
+                    role="tab" 
+                    aria-controls="pills-contact" 
+                    aria-selected="false">
+                    Updates</a>
                 </li>
             </ul>
+            </br>
 
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-text">This is some text within a card body.</p>
+                            <h5 class="card-title"> Hello, I am Liyah! </h5>
+                            <p class="card-text"> This fall I will be an undergraduate sophmore at Barrett, The Honors College at Arizona State University. I am majoring in computer science but I am focusing a lot on machine perception and building computational models to answer brain related research questions. I am now a S.T.E.P. Intern and I am excited to be at Google!</p>
                         </div>
                     </div>
                 </div>
@@ -56,33 +80,37 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Olfaction Research Project </h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Date</small></p>
+                            <p class="card-text"><small class="text-muted">ICON lab, Arizona State University</small></p>
+                            <p class="card-text">Currently working on "Using the structural features of enantiomers to predict if a pair of enantimoer molecules will be similar or divergent in odor perception"</p>
                         </div>
-                        <img src="/images/img.png" class="card-img-top">
+                        <img src="/images/img.png" class="card-img-top" style="height:400px">
                     </div>
                     </br>
 
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"> What's the Dish? </h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Date</small></p>
+                            <p class="card-text"><small class="text-muted">CSSI, Google</small></p>
+                            <p class="card-text">Two other teammates developed a webapplication with a Javascript frontend and Python server. The application helped to simplify the problem of deciding what to cook based on what's left in your kitchen</p>
                         </div>
-                        <img src="/images/three.png" class="card-img-top">
+                        <img src="/images/three.png" class="card-img-top" style="height:400px">
                     </div>
+
                 </div>
+                </br>
 
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-text">This is some text within a card body.</p>
+                            <h5 class="card-title"> S.T.E.P. Internship Week 2 </h5>
+                            <p class="card-text"><small class="text-muted">25 May 2020</small></p>
+                            <p class="card-text">This week I started with the individual projects set up for S.T.E.P Interns. I was also able to attend some official Google team meetings and some 1 on 1 meetings with my hosts. </p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         </br>
-
   </body>
 </html>
