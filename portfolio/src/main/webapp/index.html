@@ -8,77 +8,81 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
   </head>
 
   <body>
-    <div id="content">
-        </br>
-        <h1 class="name">Liyah Coleman</h1>
-        </br>
-
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner" >
-                <div class="carousel-item active">
-                <img src="/images/one.jpg" class="d-block w-100" style="height:800px" style="width:800px">
-                </div>
-                <div class="carousel-item">
-                <img src="/images/two.jpg" class="d-block w-100" style="height:800px" style="width:800px">
+        <div id="content"> 
+            </br>
+            <h1 class="name">Liyah Coleman</h1>
+            </br>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner" >
+                    <div class="carousel-item active">
+                    <img src="/images/one.jpg" class="d-block w-100" style="height:550px">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="/images/two.jpg" class="d-block w-100" style="height:550px"> 
+                    </div>
                 </div>
             </div>
-        </div>
-        </br>
+            </br> 
 
-        <nav id="navbar-example2" class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#"></a>
-            <ul class="nav nav-pills">
-                <li class="nav-item"> 
-                    <a class="nav-link" href="#one">Projects</a>
+            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">About Me</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#two"> Updates </a>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Projects</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Updates</a>
                 </li>
             </ul>
-        </nav>
 
-        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-            <h1> About Me </h1>
-            <p>Hello, my name is Liyah and this is my portfolio! I am currently a S.T.E.P. intern at Google but my first experience at Google was through the CSSI program last summer! I am really glad to be back here </p>
-            </br>
-
-            <h1 id="one"> Projects </h1>
-            <button class="btn btn-secondary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Projects</button>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body"> 
-                    <h1> Olfaction Research Project </h1>
-                    </p> I currently work in a research lab where I build compuational models to answer questions about olfaction perception. The current topic I am reasering is "using the structural features of enantiomers to predict if the pair of enantiomer molecules will be similar to divergent in odor perception." </p>
-                    <img src="images/img.png">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">This is some text within a card body.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card card-body"> 
-                    <h1> What's the Dish? </h1>
-                    </p> Two other CSSI students and I worked to build this web application with a Javascript frontend and Python server. The web application simplifies the problem of deciding what ot cook based on what's left in your kitchen </p>
-                    </p> Project link: whatsthedish.appspot.com </p>
-                    <img src="/images/three.png">
-                </div>
-            </div>
 
-            </br>
-            <h1 id="two"> Updates </h1>
-            </br>
-            <div class="blog"> 
-                <h1> Week One of S.T.E.P. </h1>
-                <p> 27 May 2020 </p>
-                <p> Working on the individual projects </p>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Olfaction Research Project </h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Date</small></p>
+                        </div>
+                        <img src="/images/img.png" class="card-img-top">
+                    </div>
+                    </br>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"> What's the Dish? </h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Date</small></p>
+                        </div>
+                        <img src="/images/three.png" class="card-img-top">
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">This is some text within a card body.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        </br> 
-        <!-- <button onclick="addRandomGreeting()"> Random Notes </button> -->
-        <p>small change</p>
+        </br>
 
-    </div>
   </body>
 </html>
