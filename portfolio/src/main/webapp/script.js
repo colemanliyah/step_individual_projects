@@ -15,8 +15,9 @@
 console.log("reached here")
 
 function fetchfunction(){
-    fetch("/data").then(response => response.text()).then((saying) => {
-        document.getElementById('testing').innerText = saying;
+    fetch("/data").then(response => response.json()).then((json) => {
+        document.getElementById('testing').innerText = json;
+        console.log(json);
     });
 }
 
