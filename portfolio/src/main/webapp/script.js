@@ -12,10 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+console.log("reached here")
+
+function fetchfunction(){
+    fetch("/data").then(response => response.json()).then((json) => {
+        document.getElementById('testing').innerText = json;
+        console.log(json);
+    });
+}
+
 /**
  * Adds a random greeting to the page.
  */
-
 function addRandomGreeting() {
   const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
