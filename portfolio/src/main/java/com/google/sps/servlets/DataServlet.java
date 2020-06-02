@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -21,27 +24,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String saying = "Hello Again";
-    ArrayList<String> messages = new ArrayList<String>();
-    messages.add("message one");
-    messages.add("message two");
-    messages.add("message three");
-    String json = convertToJsonUsingGson(messages);
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String text = getParameter(request, "comment", "");
+    
+    Entity taskEntity = new Entity("Task");
+    taskEntity.setProperty("comment", text);
 
-    response.setContentType("text/html;");
-    response.getWriter().println(json);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
+
+    response.sendRedirect("/index.html");
   }
 
-  private String convertToJsonUsingGson(ArrayList<String> mes) {
-     Gson gson = new Gson();
-    String json = gson.toJson(mes);
-    return json;
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+      String value = request.getParameter(name);
+      if (value == null) {
+          return defaultValue;
+      }
+      return value;
   }
 }
