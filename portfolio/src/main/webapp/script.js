@@ -13,8 +13,14 @@
 // limitations under the License.
 
 function fetchfunction(){
-    fetch("/data").then(response => response.json()).then((json) => {
-        document.getElementById('testing').innerText = json;
+    let fullComments = []
+    let comments = "";
+    fetch("/data").then(response => response.json()).then((tasks) => {
+        fullComments.push(tasks);
+        for (i=0; i<fullComments[0].length; i++) {
+            comments = comments + fullComments[0][i]["propertyMap"]["comment"] + "\n"; 
+        }
+        document.getElementById('testing').innerText = comments;
     });
 }
 
