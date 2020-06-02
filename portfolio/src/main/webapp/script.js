@@ -12,17 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+let comments = "";
+
 function fetchfunction(){
-    let fullComments = []
-    let comments = "";
     fetch("/data").then(response => response.json()).then((tasks) => {
-        fullComments.push(tasks);
-        for (i=0; i<fullComments[0].length; i++) {
-            comments = comments + fullComments[0][i]["propertyMap"]["comment"] + "\n"; 
+        for (i=0; i<tasks.length; i++) {
+            if (tasks[i]["propertyMap"]["comment"] == null) {
+                console.log("placeholder");
+            } else {
+                let node = document.createElement("div");
+                node.id = tasks[i]["key"]["id"];
+                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
+                document.getElementById('comments_section').appendChild(node);
+            } 
         }
-        document.getElementById('testing').innerText = comments;
     });
 }
+
+// function deleteTask(){
+//     fetch("/deleteData", {method: 'POST'});
+// }
 
 /**
  * Adds a random greeting to the page.
