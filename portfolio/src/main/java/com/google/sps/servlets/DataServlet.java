@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
 
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
@@ -32,9 +34,15 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = getParameter(request, "comment", "");
+    String name_of_user = getParameter(request, "name", "");
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+    String currentTime = dtf.format(LocalDateTime.now());
     
     Entity taskEntity = new Entity("Task");
     taskEntity.setProperty("comment", text);
+    taskEntity.setProperty("name", name_of_user);
+    taskEntity.setProperty("time", currentTime);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);

@@ -13,10 +13,26 @@
 // limitations under the License.
 
 function fetchfunction(){
-    fetch("/data").then(response => response.json()).then((json) => {
-        document.getElementById('testing').innerText = json;
+    fetch("/data").then(response => response.json()).then((tasks) => {
+        for (i=0; i<tasks.length; i++) {
+            if (tasks[i]["propertyMap"]["comment"] != null) {
+                let node = document.createElement("div");
+                node.id = tasks[i]["key"]["id"];
+                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
+
+                let nodeTwo = document.createElement("button");
+                nodeTwo.id = tasks[i]["key"]["id"];
+                nodeTwo.classList.add("delete");
+                nodeTwo.innerHTML = "Delete";
+                document.getElementById('comments_section').appendChild(node).appendChild(nodeTwo);
+            } 
+        }
     });
 }
+
+// function deleteTask(){
+//     fetch("/deleteData", {method: 'POST'});
+// }
 
 /**
  * Adds a random greeting to the page.
