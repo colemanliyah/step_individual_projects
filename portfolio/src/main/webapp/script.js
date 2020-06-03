@@ -13,6 +13,8 @@
 // limitations under the License.
 
 let key_to_be_deleted = 0;
+let countLikes = 0;
+
 function fetchfunction(){
     fetch("/data").then(response => response.json()).then((tasks) => {
         for (i=0; i<tasks.length; i++) {
@@ -23,7 +25,6 @@ function fetchfunction(){
                 let delete_comment = document.createElement("IMG");
                 delete_comment.src = "/images/deleteicon.png"
                 delete_comment.classList.add("delete");
-                delete_comment.innerHTML = "Delete";
                 delete_comment.addEventListener("click", deleteTask);
 
                 key_to_be_deleted = tasks[i]["key"]["id"];
