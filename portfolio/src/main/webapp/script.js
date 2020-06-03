@@ -12,26 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-let comments = "";
-
+let key_to_be_deleted = 0;
 function fetchfunction(){
     fetch("/data").then(response => response.json()).then((tasks) => {
         for (i=0; i<tasks.length; i++) {
-            if (tasks[i]["propertyMap"]["comment"] == null) {
-                console.log("placeholder");
-            } else {
+            if (tasks[i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
-                node.id = tasks[i]["key"]["id"];
-                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
-                document.getElementById('comments_section').appendChild(node);
+                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
+
+                let delete_comment = document.createElement("IMG");
+                delete_comment.src = "/images/deleteicon.png"
+                delete_comment.classList.add("delete");
+                delete_comment.innerHTML = "Delete";
+                delete_comment.addEventListener("click", deleteTask);
+
+                key_to_be_deleted = tasks[i]["key"]["id"];
+
+                document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);
             } 
         }
     });
 }
 
-// function deleteTask(){
-//     fetch("/deleteData", {method: 'POST'});
-// }
+function deleteTask(){
+    let params = new URLSearchParams();
+    params.append('id', key_to_be_deleted);
+    fetch("/deleteData", {method: 'POST', body: params}).then(() => {
+        console.log("need to refresh now");
+    });
+}
 
 /**
  * Adds a random greeting to the page.
