@@ -12,18 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-let comments = "";
-
 function fetchfunction(){
     fetch("/data").then(response => response.json()).then((tasks) => {
         for (i=0; i<tasks.length; i++) {
-            if (tasks[i]["propertyMap"]["comment"] == null) {
-                console.log("placeholder");
-            } else {
+            if (tasks[i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
                 node.id = tasks[i]["key"]["id"];
-                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
-                document.getElementById('comments_section').appendChild(node);
+                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
+
+                let nodeTwo = document.createElement("button");
+                nodeTwo.id = tasks[i]["key"]["id"];
+                nodeTwo.classList.add("delete");
+                nodeTwo.innerHTML = "Delete";
+                document.getElementById('comments_section').appendChild(node).appendChild(nodeTwo);
             } 
         }
     });
