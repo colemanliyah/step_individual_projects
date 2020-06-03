@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 let key_to_be_deleted = 0;
-let countLikes = 0;
 
 function fetchfunction(){
     fetch("/data").then(response => response.json()).then((tasks) => {

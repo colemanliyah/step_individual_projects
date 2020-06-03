@@ -37,8 +37,7 @@ public class DataServlet extends HttpServlet {
     String name_of_user = getParameter(request, "name", "");
 
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-    LocalDateTime now = LocalDateTime.now();  
-    String currentTime = dtf.format(now);
+    String currentTime = dtf.format(LocalDateTime.now());
     
     Entity taskEntity = new Entity("Task");
     taskEntity.setProperty("comment", text);
