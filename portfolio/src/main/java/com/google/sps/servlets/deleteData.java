@@ -30,5 +30,6 @@ public class deleteData extends HttpServlet {
                 datastore.delete(taskEntity.getKey());
             } 
         }
+        response.sendRedirect("/index.html");
   }
 }

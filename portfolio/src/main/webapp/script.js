@@ -13,9 +13,9 @@
 // limitations under the License.
 
 
-let key_to_be_deleted = 0;
+let delete_comment_key = 0;
 
-function fetchfunction(){
+function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
         for (i=0; i<tasks.length; i++) {
             if (tasks[i]["propertyMap"]["comment"] != null) {
@@ -25,9 +25,9 @@ function fetchfunction(){
                 let delete_comment = document.createElement("IMG");
                 delete_comment.src = "/images/deleteicon.png"
                 delete_comment.classList.add("delete");
-                delete_comment.addEventListener("click", deleteTask);
+                delete_comment.addEventListener("click", deleteComment);
 
-                key_to_be_deleted = tasks[i]["key"]["id"];
+                delete_comment_key = tasks[i]["key"]["id"];
 
                 document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);
             } 
@@ -35,9 +35,9 @@ function fetchfunction(){
     });
 }
 
-function deleteTask(){
+function deleteComment(){
     let params = new URLSearchParams();
-    params.append('id', key_to_be_deleted);
+    params.append('id', delete_comment_key);
     fetch("/deleteData", {method: 'POST', body: params}).then(() => {
         console.log("need to refresh now");
     });
