@@ -25,8 +25,7 @@ public class deleteData extends HttpServlet {
         try {
             id = Long.parseLong(request.getParameter("id"));
         } catch (NumberFormatException e){
-            //response.sendError(400, "Some useful error message -Oliver");
-            response.sendError(400, "Some useful error message - Oliver");
+            return response.sendError(400, "Some useful error message - Oliver");
         }
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
