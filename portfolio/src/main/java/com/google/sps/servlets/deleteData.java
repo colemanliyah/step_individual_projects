@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.NumberFormatException;
 
 // /** Servlet responsible for deleting tasks. */
 @WebServlet("/deleteData")
@@ -20,7 +21,12 @@ public class deleteData extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Query query = new Query("Task");
-        long id = Long.parseLong(request.getParameter("id"));
+        long id = 0;
+        try {
+            id = Long.parseLong(request.getParameter("id"));
+        } catch (NumberFormatException e){
+            System.out.println("400 Error");
+        }
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query); 

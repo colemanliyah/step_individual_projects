@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-let delete_comment_key = 0;
-
 function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
         for (i=0; i<tasks.length; i++) {
@@ -25,9 +22,8 @@ function getComments(){
                 let delete_comment = document.createElement("IMG");
                 delete_comment.src = "/images/deleteicon.png"
                 delete_comment.classList.add("delete");
-                delete_comment.addEventListener("click", deleteComment);
-
-                delete_comment_key = tasks[i]["key"]["id"];
+                delete_comment.id = tasks[i]["key"]["id"];
+                delete_comment.addEventListener("click", function(){deleteComment(delete_comment.id)});
 
                 document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);
             } 
@@ -35,9 +31,15 @@ function getComments(){
     });
 }
 
-function deleteComment(){
+function comments_to_display(){
+    let num = document.getElementById("num_of_comments");
+    let number = num.options[num.selectedIndex].value;
+    console.log(number);
+}
+
+function deleteComment(key){
     let params = new URLSearchParams();
-    params.append('id', delete_comment_key);
+    params.append('id', key);
     fetch("/deleteData", {method: 'POST', body: params}).then(() => {
         console.log("need to refresh now");
     });
