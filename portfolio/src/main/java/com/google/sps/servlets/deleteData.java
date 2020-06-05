@@ -20,12 +20,14 @@ public class deleteData extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         Query query = new Query("Task");
         long id = 0;
         try {
             id = Long.parseLong(request.getParameter("id"));
         } catch (NumberFormatException e){
-            return response.sendError(400, "Some useful error message - Oliver");
+            response.sendError(400, "Some useful error message - Oliver");
+            return;
         }
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
