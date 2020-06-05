@@ -17,3 +17,15 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+.delete {
+    transition-duration: 0.4s;
+    cursor: pointer;
+    opacity: 0.6;
+    width: 30px;
+    height: 30px;
+}
+
+.delete:hover {
+    opacity: 1;
+}

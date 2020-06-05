@@ -12,27 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function fetchfunction(){
+function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
         for (i=0; i<tasks.length; i++) {
             if (tasks[i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
-                node.id = tasks[i]["key"]["id"];
                 node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
 
-                let nodeTwo = document.createElement("button");
-                nodeTwo.id = tasks[i]["key"]["id"];
-                nodeTwo.classList.add("delete");
-                nodeTwo.innerHTML = "Delete";
-                document.getElementById('comments_section').appendChild(node).appendChild(nodeTwo);
+                let delete_comment = document.createElement("IMG");
+                delete_comment.src = "/images/deleteicon.png"
+                delete_comment.classList.add("delete");
+                delete_comment.id = tasks[i]["key"]["id"];
+                delete_comment.addEventListener("click", function(){deleteComment(delete_comment.id)});
+
+                document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);
             } 
         }
     });
 }
 
-// function deleteTask(){
-//     fetch("/deleteData", {method: 'POST'});
-// }
+function comments_to_display(){
+    let num = document.getElementById("num_of_comments");
+    let number = num.options[num.selectedIndex].value;
+    console.log(number);
+}
+
+function deleteComment(key){
+    let params = new URLSearchParams();
+    params.append('id', key);
+    fetch("/deleteData", {method: 'POST', body: params}).then(() => {
+        console.log("need to refresh now");
+    });
+}
 
 /**
  * Adds a random greeting to the page.
