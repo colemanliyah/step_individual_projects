@@ -16,17 +16,16 @@ import java.util.List;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultList;
 import com.google.appengine.api.datastore.Cursor;
-import java.util.HashMap;
+import java.io.PrintWriter;
 
 @WebServlet("/data")
 public class RequestServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         FetchOptions fetchOptions = FetchOptions.Builder.withLimit(5);
 
         String startCursor = request.getParameter("cursor");
-        System.out.println(startCursor);
+        // System.out.println(startCursor);
         if (startCursor != null) {
             fetchOptions.startCursor(Cursor.fromWebSafeString(startCursor));
         }
@@ -39,7 +38,7 @@ public class RequestServlet extends HttpServlet {
         try {
             results = pq.asQueryResultList(fetchOptions);
         } catch (IllegalArgumentException e) {
-            response.sendRedirect("/index");
+            response.sendRedirect("/data");
             return;
         }
 

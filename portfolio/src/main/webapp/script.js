@@ -15,7 +15,7 @@ let cursor = "";
 
 function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
-        cusor = tasks[1];
+        cursor = tasks[1];
         for (i=0; i<tasks[0].length; i++) {
             if (tasks[0][i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
@@ -33,14 +33,6 @@ function getComments(){
     });
 }
 
-function loadMoreComments(){
-    let cursor_value = document.createElement("P");
-    //cursor_value.name = 'cursor';
-    cursor_value.innerText = cursor; 
-    document.getElementById("cursor_placeholder").appendChild(cursor_value);
-    console.log(cursor_value.innerText);
-}
-
 function deleteComment(key){
     let params = new URLSearchParams();
     params.append('id', key);
@@ -49,18 +41,9 @@ function deleteComment(key){
     });
 }
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function createMap() {
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 37.422, lng: -122.084}, zoom: 8});
 }
 
