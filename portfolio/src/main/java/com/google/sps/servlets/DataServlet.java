@@ -30,7 +30,6 @@ import java.time.LocalDateTime;
 
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
-    private int maxComments = 5;
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
