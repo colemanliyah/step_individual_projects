@@ -24,12 +24,6 @@ public class RequestServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         FetchOptions fetchOptions = FetchOptions.Builder.withLimit(5);
 
-        String startCursor = request.getParameter("cursor");
-        // System.out.println(startCursor);
-        if (startCursor != null) {
-            fetchOptions.startCursor(Cursor.fromWebSafeString(startCursor));
-        }
-
         Query query = new Query("Task");
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery pq = datastore.prepare(query);
@@ -41,17 +35,11 @@ public class RequestServlet extends HttpServlet {
             response.sendRedirect("/data");
             return;
         }
-
-        String cursorString = results.getCursor().toWebSafeString();      
-
-        List<Object> fetchable_elements = new ArrayList<Object>();
-        fetchable_elements.add(results);
-        fetchable_elements.add(cursorString);
-
+        
         Gson gson = new Gson();
 
         response.setContentType("application/json;");
-        response.getWriter().println(gson.toJson(fetchable_elements));
+        response.getWriter().println(gson.toJson(results));
 
     }
 

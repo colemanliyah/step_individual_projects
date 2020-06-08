@@ -11,20 +11,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-let cursor = "";
 
 function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
-        cursor = tasks[1];
-        for (i=0; i<tasks[0].length; i++) {
-            if (tasks[0][i]["propertyMap"]["comment"] != null) {
+        for (i=0; i<tasks.length; i++) {
+            if (tasks[i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
-                node.innerText = tasks[0][i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[0][i]["propertyMap"]["time"] + "\n -- " + tasks[0][i]["propertyMap"]["name"] + "\n ";
+                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
 
                 let delete_comment = document.createElement("IMG");
                 delete_comment.src = "/images/deleteicon.png"
                 delete_comment.classList.add("delete");
-                delete_comment.id = tasks[0][i]["key"]["id"];
+                delete_comment.id = tasks[i]["key"]["id"];
                 delete_comment.addEventListener("click", function(){deleteComment(delete_comment.id)});
 
                 document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);
