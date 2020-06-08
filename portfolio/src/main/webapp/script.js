@@ -31,12 +31,6 @@ function getComments(){
     });
 }
 
-function comments_to_display(){
-    let num = document.getElementById("num_of_comments");
-    let number = num.options[num.selectedIndex].value;
-    console.log(number);
-}
-
 function deleteComment(key){
     let params = new URLSearchParams();
     params.append('id', key);
@@ -45,18 +39,9 @@ function deleteComment(key){
     });
 }
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function createMap() {
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 37.422, lng: -122.084}, zoom: 8});
 }
 

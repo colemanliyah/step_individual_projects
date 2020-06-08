@@ -9,10 +9,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOKBlynhsISJkz7QfPwfayyuoToUdkQLM"></script>
     <script src="script.js"></script>
   </head>
 
-  <body onload="getComments()">   
+  <body onload="getComments(); createMap();">   
         <div id="content"> 
             </br>
             <h1 class="name">Liyah Coleman</h1>
@@ -131,8 +132,8 @@
                         </br>
                     </div>                   
                 </div>
-                </div>
-                </br>
+            </div>
+            </br>
                 
             <div class="card">
                 <div class="card-header"> Comments </div>
@@ -145,26 +146,36 @@
                             </br>
                             <h6> Leave a comment letting us know what you think </h6>
                             <input type="text" name="comment">
-                            </br>
+                            </br> 
                             <button> Submit </button>
+                            </br>
                         </form>
-                        </br>
+                        </br> 
                         <h6> Comments : </h6>
                         </br>
                         <div id="comments_section"></div>
                         </div>
                     </div>
                 </div>
-                </div>
-            </div>                            
             </div>
-            </br>
+            </br>            
 
-            <a href="https://www.linkedin.com/in/liyahcoleman" target="_blank"> <img src="/images/linkedin.png" style="height:50px" style="width:50px" class="logo"> </a>
-            <a href="https://github.com/colemanliyah" target="_blank"> <img src="/images/github.png" style="height:50px" style="width:50px"> </a>
-            </br>
+            <div class="card">
+                <div class="card-header"> Map </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="map"></div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
 
-        </div>
+        </div>                            
         </br>
+
+        <a href="https://www.linkedin.com/in/liyahcoleman" target="_blank"> <img src="/images/linkedin.png" style="height:50px" style="width:50px" class="logo"> </a>
+        <a href="https://github.com/colemanliyah" target="_blank"> <img src="/images/github.png" style="height:50px" style="width:50px"> </a>
+        </br></br>
   </body>
 </html>

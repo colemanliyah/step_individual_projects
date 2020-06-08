@@ -13,26 +13,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.QueryResultList;
+import com.google.appengine.api.datastore.Cursor;
+import java.io.PrintWriter;
 
 @WebServlet("/data")
 public class RequestServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
+        FetchOptions fetchOptions = FetchOptions.Builder.withLimit(5);
+
         Query query = new Query("Task");
-
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        PreparedQuery results = datastore.prepare(query);
+        PreparedQuery pq = datastore.prepare(query);
 
-        List<Entity> tasks = new ArrayList<>();
-            for (Entity taskEntity : results.asIterable()) {
-                tasks.add(taskEntity);
-            }
-
+        QueryResultList<Entity> results;
+        try {
+            results = pq.asQueryResultList(fetchOptions);
+        } catch (IllegalArgumentException e) {
+            response.sendRedirect("/data");
+            return;
+        }
+        
         Gson gson = new Gson();
 
         response.setContentType("application/json;");
-        response.getWriter().println(gson.toJson(tasks));
+        response.getWriter().println(gson.toJson(results));
+
     }
 
 }
