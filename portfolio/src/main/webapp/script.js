@@ -39,66 +39,47 @@ function deleteComment(key){
     });
 }
 
+function createMarkerWindow(marker, message) {
+    let newInfoWindow = new google.maps.InfoWindow({
+        content: message
+    });
+    newInfoWindow.open(map, marker);
+} 
+
+function createStaticMarker(lat_coord, lng_coord, map, heading) {
+    let staticMarker = new google.maps.Marker({
+        position: {lat: lat_coord, lng: lng_coord},
+        map: map,
+        title: heading,
+    });
+    return staticMarker;
+}
+
 let map=null;
 function createMap() {
     map = new google.maps.Map(
     document.getElementById('map'),
     {center: {lat: 37.422, lng: -122.084}, zoom: 4, mapTypeId: 'hybrid'});
 
-    let homeMarkerInfo = new google.maps.InfoWindow({
-        content: "<h6> Phoenix </h6>" + "</br>" + "<p>I have grown up in Arizona all my life. I lived in Virgina for three months when I was eight because my dad is from there but otherwise I have only lived in AZ</p>"
-    });
+    let homeMarker = createStaticMarker(34.049, -111.094, map);
+    homeMarker.addListener('click', function() {createMarkerWindow(homeMarker, "<h6> Phoenix </h6>" + "</br>" + "<p>I have grown up in Arizona all my life. I lived in Virgina for three months when I was eight because my dad is from there but otherwise I have only lived in AZ</p>", "My Home State!")});
 
-    let homeMarker = new google.maps.Marker({
-        position: {lat: 34.049, lng: -111.094},
-        map: map,
-        title: "My Home State"
-    });
+    let travelMarker = createStaticMarker(41.872, 12.567, map);
+    travelMarker.addListener('click', function(){createMarkerWindow(travelMarker, "<h6> Italy </h6> " + "</br>" + "<p> If I could go anywhere in the world, I would go to Italy. I have never been there before </p>")});
 
-    homeMarker.addListener('click', function() {
-        homeMarkerInfo.open(map, homeMarker);
-    });
-
-    let travelMarkerInfo = new google.maps.InfoWindow({
-        content: "<h1> Italy </h1> " + "</br>" + "<p> If I could go anywhere in the world, I would go to Italy. I have never been there before </p>"
-    })
-
-    let travelMarker = new google.maps.Marker({
-        position: {lat: 41.872, lng: 12.567},
-        map:map,
-    });
-
-    travelMarker.addListener('click', function(){
-        travelMarkerInfo.open(map, travelMarker);
-    });
-
-    firstTimeGoogleInfo = new google.maps.InfoWindow({
-        content: "<h6> Seattle </h6>" + "</br>" + "<p> My first experience being at Google was here in Seattle the summer of 2019!</p>"
-    });
-
-    let firstTimeGoogle = new google.maps.Marker({
-        position: {lat: 47.606, lng: -122.332},
-        map:map,
-    });
-
-    firstTimeGoogle.addListener('click', function(){
-        firstTimeGoogleInfo.open(map, firstTimeGoogle);
-    });
+    let firstTimeGoogle = createStaticMarker(47.606, -122.332, map);
+    firstTimeGoogle.addListener('click', function() {createMarkerWindow(firstTimeGoogle, "<h6> Seattle </h6>" + "</br>" + "<p> My first experience being at Google was here in Seattle the summer of 2019!</p>")});
 }
 
 let places_been = [["37", "-76"],["33","-118"], ["34","-118"]];
 function createMarkers() {
     let lat_guess = document.getElementById("lat").value;
     let lng_guess = document.getElementById("lng").value;
-    let temp ="";
+    let temp = "";
     for (let i=0; i<places_been.length; i++){
         if (JSON.stringify(places_been[i]) == JSON.stringify([lat_guess, lng_guess])){
             temp = "Yes, I have been there! See the marker add to the Map";
-            let visited_place = new google.maps.Marker({
-                position: {lat: parseInt(lat_guess), lng: parseInt(lng_guess)},
-                map:map,
-                title: "Place I have Visited!"
-                });
+            let visited_place = createStaticMarker(parseInt(lat_guess),parseInt(lng_guess),map,"Place I have Visited!");
         }
     }
     if (temp.localeCompare("")){
@@ -109,7 +90,7 @@ function createMarkers() {
     event.preventDefault();
 }
 
-function hints() {
+function gethints() {
   let hint = ["I've been to a city in the state that is considered the 'mother of states'", "I've been to the city the movie 'Freedom Writers' is located in", "I've been to the city nicknamed 'the Bu' "];
   let randomHint = hint[Math.floor(Math.random() * hint.length)];
   let hint_container = document.getElementById('hint_container');
