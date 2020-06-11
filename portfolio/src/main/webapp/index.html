@@ -140,7 +140,7 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                        <form action="/comments" method="POST">
+                        <form action="/comments" method="POST" id="comments_form">
                             <h6> Name </h6>
                             <input type="text" name="name">
                             </br>
@@ -165,7 +165,7 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <form onsubmit="return createMarkers()">
+                            <form onsubmit="return checkUserMarkerGuess()">
                                 <h6> Can you guess which places I have visited? </h6>
                                 <p> Put the laterial and longitudinal coordinates of the cities you think I've been to (Round to the nearest whole number) </p>
                                 </br>

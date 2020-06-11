@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+let map=null;
 
 function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
@@ -55,7 +56,6 @@ function createStaticMarker(lat_coord, lng_coord, map, heading) {
     return staticMarker;
 }
 
-let map=null;
 function createMap() {
     map = new google.maps.Map(
     document.getElementById('map'),
@@ -71,13 +71,13 @@ function createMap() {
     firstTimeGoogle.addListener('click', function() {createMarkerWindow(firstTimeGoogle, "<h6> Seattle </h6>" + "</br>" + "<p> My first experience being at Google was here in Seattle the summer of 2019!</p>", map)});
 }
 
-let places_been = [["37", "-76"],["33","-118"], ["34","-118"]];
-function createMarkers() {
+function checkUserMarkerGuess() {
+    let hidden_coordinates = [["37", "-76"],["33","-118"], ["34","-118"]];
     let lat_guess = document.getElementById("lat").value;
     let lng_guess = document.getElementById("lng").value;
     let answer = "";
-    for (let i=0; i<places_been.length; i++){
-        if (JSON.stringify(places_been[i]) == JSON.stringify([lat_guess, lng_guess])){
+    for (let i=0; i<hidden_coordinates.length; i++){
+        if (JSON.stringify(hidden_coordinates[i]) == JSON.stringify([lat_guess, lng_guess])){
             answer = "Yes, I have been there! See the marker add to the Map";
             let visited_place = createStaticMarker(parseInt(lat_guess),parseInt(lng_guess),map,"Place I have Visited!");
         }
