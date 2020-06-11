@@ -16,7 +16,6 @@ import java.util.List;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultList;
 import com.google.appengine.api.datastore.Cursor;
-import java.io.PrintWriter;
 
 @WebServlet("/data")
 public class RequestServlet extends HttpServlet {
@@ -35,7 +34,7 @@ public class RequestServlet extends HttpServlet {
             response.sendRedirect("/data");
             return;
         }
-        
+
         Gson gson = new Gson();
 
         response.setContentType("application/json;");
