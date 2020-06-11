@@ -15,15 +15,27 @@ let map=null;
 
 function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
-        for (i=0; i<tasks.length; i++) {
-            if (tasks[i]["propertyMap"]["comment"] != null) {
+        if(tasks[2] == "true"){
+            document.getElementById("comments_form").style.display = "block";
+            document.getElementById("authentication").innerHTML = "Log Out";
+        }
+        else {
+            document.getElementById("authentication").innerHTML = "Log In";
+            document.getElementById("needSignIn").style.display = "block";
+        }
+        
+        document.getElementById("authentication").style.display = "block";
+        document.getElementById("authentication").href = tasks[1];
+
+        for (i=0; i<tasks[0].length; i++) {
+            if (tasks[0][i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
-                node.innerText = tasks[i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[i]["propertyMap"]["time"] + "\n -- " + tasks[i]["propertyMap"]["name"] + "\n ";
+                node.innerText = tasks[0][i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[0][i]["propertyMap"]["time"] + "\n -- " + tasks[0][i]["propertyMap"]["name"] + ", " + tasks[0][i]["propertyMap"]["email"] + "\n ";
 
                 let delete_comment = document.createElement("IMG");
                 delete_comment.src = "/images/deleteicon.png"
                 delete_comment.classList.add("delete");
-                delete_comment.id = tasks[i]["key"]["id"];
+                delete_comment.id = tasks[0][i]["key"]["id"];
                 delete_comment.addEventListener("click", function(){deleteComment(delete_comment.id)});
 
                 document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);

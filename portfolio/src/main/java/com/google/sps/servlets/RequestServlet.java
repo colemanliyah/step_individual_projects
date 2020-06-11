@@ -6,6 +6,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +23,17 @@ import com.google.appengine.api.datastore.Cursor;
 public class RequestServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        UserService userService = UserServiceFactory.getUserService();
+
+        String authenticationUrl = "";
+        String loggedin = "false";
+        if(!userService.isUserLoggedIn()){
+            authenticationUrl = userService.createLoginURL("/index.html");
+        } else {
+            authenticationUrl = userService.createLogoutURL("/index.html");
+            loggedin ="true";
+        }
+        
         FetchOptions fetchOptions = FetchOptions.Builder.withLimit(5);
 
         Query query = new Query("Task");
@@ -35,10 +48,15 @@ public class RequestServlet extends HttpServlet {
             return;
         }
 
+        List<Object> fetchable_items = new ArrayList<Object>();
+        fetchable_items.add(results);
+        fetchable_items.add(authenticationUrl);
+        fetchable_items.add(loggedin);
+
         Gson gson = new Gson();
 
         response.setContentType("application/json;");
-        response.getWriter().println(gson.toJson(results));
+        response.getWriter().println(gson.toJson(fetchable_items));
 
     }
 

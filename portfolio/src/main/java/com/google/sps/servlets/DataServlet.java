@@ -27,14 +27,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;    
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+
+    if(!userService.isUserLoggedIn()) {
+        response.sendRedirect("/index.html");
+        return;
+    }
+
     String text = getParameter(request, "comment", "");
     String name_of_user = getParameter(request, "name", "");
+    String email = userService.getCurrentUser().getEmail();
 
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
     String currentTime = dtf.format(LocalDateTime.now());
@@ -43,6 +53,7 @@ public class DataServlet extends HttpServlet {
     taskEntity.setProperty("comment", text);
     taskEntity.setProperty("name", name_of_user);
     taskEntity.setProperty("time", currentTime);
+    taskEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
