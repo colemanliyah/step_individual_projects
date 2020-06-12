@@ -50,7 +50,7 @@
 .button {
     display: block;
     width: 100px;
-    height: 50px;
+    height: 40px;
     background: #4E9CAF;
     padding: 10px;
     text-align: center;
@@ -58,4 +58,23 @@
     color: white;
     font-weight: bold;
     line-height: 25px;
+}
+
+.topnav {
+  background-color: #f2f2f2;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #4E9CAF;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
 }
