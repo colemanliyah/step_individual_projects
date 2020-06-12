@@ -15,7 +15,7 @@ let map=null;
 
 function getComments(){
     fetch("/data").then(response => response.json()).then((tasks) => {
-        if(tasks[2] == "true"){
+        if(tasks["loggedin"]){
             document.getElementById("comments_form").style.display = "block";
             document.getElementById("authentication").innerHTML = "Log Out";
         }
@@ -25,17 +25,17 @@ function getComments(){
         }
         
         document.getElementById("authentication").style.display = "block";
-        document.getElementById("authentication").href = tasks[1];
+        document.getElementById("authentication").href = tasks["authenticationUrl"];
 
-        for (i=0; i<tasks[0].length; i++) {
-            if (tasks[0][i]["propertyMap"]["comment"] != null) {
+        for (i=0; i<tasks["comments"].length; i++) {
+            if (tasks["comments"][i]["propertyMap"]["comment"] != null) {
                 let node = document.createElement("div");
-                node.innerText = tasks[0][i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks[0][i]["propertyMap"]["time"] + "\n -- " + tasks[0][i]["propertyMap"]["name"] + ", " + tasks[0][i]["propertyMap"]["email"] + "\n ";
+                node.innerText = tasks["comments"][i]["propertyMap"]["comment"] + "\n -- Date posted: "  + tasks["comments"][i]["propertyMap"]["time"] + "\n -- " + tasks["comments"][i]["propertyMap"]["name"] + ", " + tasks["comments"][i]["propertyMap"]["email"] + "\n ";
 
                 let delete_comment = document.createElement("IMG");
                 delete_comment.src = "/images/deleteicon.png"
                 delete_comment.classList.add("delete");
-                delete_comment.id = tasks[0][i]["key"]["id"];
+                delete_comment.id = tasks["comments"][i]["key"]["id"];
                 delete_comment.addEventListener("click", function(){deleteComment(delete_comment.id)});
 
                 document.getElementById('comments_section').appendChild(node).appendChild(delete_comment);

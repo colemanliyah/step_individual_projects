@@ -6,6 +6,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -18,6 +20,8 @@ import java.util.List;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultList;
 import com.google.appengine.api.datastore.Cursor;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/data")
 public class RequestServlet extends HttpServlet {
@@ -26,12 +30,12 @@ public class RequestServlet extends HttpServlet {
         UserService userService = UserServiceFactory.getUserService();
 
         String authenticationUrl = "";
-        String loggedin = "false";
+        Boolean loggedin = false;
         if(!userService.isUserLoggedIn()){
             authenticationUrl = userService.createLoginURL("/index.html");
         } else {
             authenticationUrl = userService.createLogoutURL("/index.html");
-            loggedin ="true";
+            loggedin = true;
         }
         
         FetchOptions fetchOptions = FetchOptions.Builder.withLimit(5);
@@ -40,23 +44,24 @@ public class RequestServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery pq = datastore.prepare(query);
 
-        QueryResultList<Entity> results;
+        QueryResultList<Entity> comments;
         try {
-            results = pq.asQueryResultList(fetchOptions);
+            comments = pq.asQueryResultList(fetchOptions);
         } catch (IllegalArgumentException e) {
             response.sendRedirect("/data");
             return;
         }
 
-        List<Object> fetchable_items = new ArrayList<Object>();
-        fetchable_items.add(results);
-        fetchable_items.add(authenticationUrl);
-        fetchable_items.add(loggedin);
+        Map<String, Object> fetchable_items = new HashMap();
+        fetchable_items.put("comments", comments);
+        fetchable_items.put("authenticationUrl", authenticationUrl);
+        fetchable_items.put("loggedin", loggedin);
 
         Gson gson = new Gson();
+        Type gsonType = new TypeToken<HashMap>(){}.getType();
 
         response.setContentType("application/json;");
-        response.getWriter().println(gson.toJson(fetchable_items));
+        response.getWriter().println(gson.toJson(fetchable_items, gsonType));
 
     }
 
