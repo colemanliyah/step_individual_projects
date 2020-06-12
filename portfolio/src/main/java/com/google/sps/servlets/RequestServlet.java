@@ -30,12 +30,11 @@ public class RequestServlet extends HttpServlet {
         UserService userService = UserServiceFactory.getUserService();
 
         String authenticationUrl = "";
-        Boolean loggedin = false;
-        if(!userService.isUserLoggedIn()){
+        Boolean loggedin = userService.isUserLoggedIn();
+        if(!loggedin){
             authenticationUrl = userService.createLoginURL("/index.html");
         } else {
             authenticationUrl = userService.createLogoutURL("/index.html");
-            loggedin = true;
         }
         
         FetchOptions fetchOptions = FetchOptions.Builder.withLimit(5);
