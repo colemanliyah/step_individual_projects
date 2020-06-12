@@ -33,11 +33,9 @@ public class deleteData extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query); 
 
-        for (Entity taskEntity : results.asIterable()) {
-            if(taskEntity.getKey().getId() == id) {
-                datastore.delete(taskEntity.getKey());
-            } 
-        }
+        Key delete_key = KeyFactory.createKey("Task", id);
+        datastore.delete(delete_key);
+
         response.sendRedirect("/index.html");
   }
 }
