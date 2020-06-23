@@ -16,12 +16,8 @@ package com.google.sps;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -60,14 +56,16 @@ public final class FindMeetingQuery {
 
     TimeRange marker = TimeRange.START;
 
-    for(TimeRange meeting : occupiedTimes){
-        if(meeting.start() > marker.end() && meeting.start()-marker.end() >= request.getDuration()) {
-            validTimes.add(TimeRange.fromStartEnd(marker.end(), meeting.start()-1, true));
+    for(TimeRange exsistingMeetingTime : occupiedTimes){
+        if(exsistingMeetingTime.start() > marker.end() && exsistingMeetingTime.start()-marker.end() >= request.getDuration()) {
+            validTimes.add(TimeRange.fromStartEnd(marker.end(), exsistingMeetingTime.start()-1, true));
         }
-        if(marker.end() < meeting.end()) {
-            marker = meeting;
+        if(marker.end() < exsistingMeetingTime.end()) {
+            marker = exsistingMeetingTime;
         }
     }
+    
+    //Check to see if there is time between the last meeting and the end of the day to have a meeting
     if(marker.end()!=whole_day.end() && whole_day.end()-marker.end()>=request.getDuration()){
         validTimes.add(TimeRange.fromStartEnd(marker.end(), whole_day.end()-1, true));
     } 
