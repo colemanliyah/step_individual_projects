@@ -15,9 +15,62 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    
+    ArrayList<TimeRange> validTimes = new ArrayList<TimeRange>();
+    Collection<String> wantedAttendees = request.getAttendees();
+    ArrayList<TimeRange> occupiedTimes = new ArrayList<TimeRange>();
+
+    TimeRange whole_day = TimeRange.WHOLE_DAY;
+
+    if(wantedAttendees.size() == 0) {
+        validTimes.add(whole_day);
+        return validTimes;
+    }
+
+    if(request.getDuration() > whole_day.duration()) {
+        return validTimes;
+    }
+
+    for(Event schedule : events) {
+        Collection<String> busyAttendees = schedule.getAttendees();
+
+        for(String person:wantedAttendees) {
+            if(busyAttendees.contains(person)) {
+                occupiedTimes.add(schedule.getWhen());
+            }
+        }
+    }
+
+    if(occupiedTimes.size()==0) {
+        validTimes.add(whole_day);
+        return validTimes;
+    }
+
+    Collections.sort(occupiedTimes, TimeRange.ORDER_BY_START);
+
+    TimeRange marker = TimeRange.START;
+
+    for(TimeRange exsistingMeetingTime : occupiedTimes){
+        if(exsistingMeetingTime.start() > marker.end() && exsistingMeetingTime.start()-marker.end() >= request.getDuration()) {
+            validTimes.add(TimeRange.fromStartEnd(marker.end(), exsistingMeetingTime.start()-1, true));
+        }
+        if(marker.end() < exsistingMeetingTime.end()) {
+            marker = exsistingMeetingTime;
+        }
+    }
+    
+    //Check to see if there is time between the last meeting and the end of the day to have a meeting
+    if(marker.end()!=whole_day.end() && whole_day.end()-marker.end()>=request.getDuration()){
+        validTimes.add(TimeRange.fromStartEnd(marker.end(), whole_day.end()-1, true));
+    } 
+
+    return validTimes;
+
   }
 }
